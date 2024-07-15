@@ -1,12 +1,18 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Enum as SqlEnum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from eralchemy2 import render_er
 
 Base = declarative_base()
+
+class Type(SqlEnum):
+    PNG = ".png"
+    JPEG = ".jpeg"
+    WEBP = ".webp"
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -50,6 +56,7 @@ class Media(Base):
     url = Column(String(250), unique=True)
     post_id = Column(Integer, ForeignKey('post.id'))
     post = relationship(Post)
+    role = Column(SqlEnum(Type), nullable=False)
 
 class Comment(Base):
     __tablename__ = 'Comment'
