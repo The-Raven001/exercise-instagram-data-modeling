@@ -5,10 +5,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from eralchemy2 import render_er
+from enum import Enum as PyEnum
 
 Base = declarative_base()
 
-class Type(SqlEnum):
+class Type(PyEnum):
     PNG = ".png"
     JPEG = ".jpeg"
     WEBP = ".webp"
